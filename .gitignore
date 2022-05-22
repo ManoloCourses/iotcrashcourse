@@ -128,4 +128,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-data/
+data/emqx
+data/grafana
+data/influxdb
+data/mocksensor

@@ -44,3 +44,18 @@ services:
         max_attempts: 20
     volumes:
       - ./data/telegrafoutput/telegraf.conf:/etc/telegraf/telegraf.conf
+  grafana:
+    user: root
+    image: "grafana/grafana:8.5.3"
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD__FILE=/run/secrets/admin_password
+    volumes:
+      - ./data/grafana:/var/lib/grafana
+    secrets:
+      - source: grafana_admin_password
+        target: /run/secrets/admin_password
+secrets:
+  grafana_admin_password:
+    file: ./secrets/grafana_admin_password
