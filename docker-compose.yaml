@@ -4,3 +4,14 @@ services:
     build: mocksensor
     volumes:
       - ./data/mocksensor:/tmp/
+  emqx:
+    user: root
+    image: "emqx:4.4.3"
+    ports:
+      - "18083:18083" 
+    volumes:
+      - ./data/emqx/data:/opt/emqx/data
+      - ./data/emqx/log:/opt/emqx/log
+    environment:
+      - EMQX_DASHBOARD__DEFAULT_USER__LOGIN=manolo
+      - EMQX_DASHBOARD__DEFAULT_USER__PASSWORD=iotcrashcourse
