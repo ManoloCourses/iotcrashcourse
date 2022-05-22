@@ -15,3 +15,8 @@ services:
     environment:
       - EMQX_DASHBOARD__DEFAULT_USER__LOGIN=manolo
       - EMQX_DASHBOARD__DEFAULT_USER__PASSWORD=iotcrashcourse
+  telegrafinput:
+    image: "telegraf:1.22.4"
+    volumes:
+      - ./data/telegrafinput/telegraf.conf:/etc/telegraf/telegraf.conf
+      - ./data/mocksensor:/tmp/mocksensor
