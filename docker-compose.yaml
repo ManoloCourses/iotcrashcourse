@@ -20,3 +20,18 @@ services:
     volumes:
       - ./data/telegrafinput/telegraf.conf:/etc/telegraf/telegraf.conf
       - ./data/mocksensor:/tmp/mocksensor
+  influxdb:
+    image: "influxdb:2.2.0-alpine"
+    ports: 
+      - "8086:8086"
+    volumes:
+      - ./data/influxdb/data:/var/lib/influxdb2
+      - ./data/influxdb/config:/etc/influxdb2
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=manolo
+      - DOCKER_INFLUXDB_INIT_PASSWORD=iotcrashcourse
+      - DOCKER_INFLUXDB_INIT_ORG=manolotech
+      - DOCKER_INFLUXDB_INIT_BUCKET=iotdata
+      - DOCKER_INFLUXDB_INIT_RETENTION=1w
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=manolotech-iotdata-auth-token
