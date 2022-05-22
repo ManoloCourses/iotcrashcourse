@@ -35,3 +35,12 @@ services:
       - DOCKER_INFLUXDB_INIT_BUCKET=iotdata
       - DOCKER_INFLUXDB_INIT_RETENTION=1w
       - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=manolotech-iotdata-auth-token
+  telegrafoutput:
+    image: "telegraf:1.22.4"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 20
+    volumes:
+      - ./data/telegrafoutput/telegraf.conf:/etc/telegraf/telegraf.conf
